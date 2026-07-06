@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: ${ORACLE_JDBC_URL:${url}}
+    username: ${ORACLE_JDBC_USER:${user}}
+    password: ${ORACLE_JDBC_PASSWORD:${password}}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+langchain4j:
+  ollama:
+    chat-model:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      model-name: ${OLLAMA_MODEL_NAME:qwen3:8b}
+  chat-memory:
+    max-messages: 20
+  community:
+    oracle:
+      embeddingstore:
+        enabled: false
+      chat-memory:
+        enabled: true
+        table-name: ${ORACLE_CHAT_MEMORY_TABLE:LANGCHAIN4J_CHAT_MEMORY}
+        create-table: true
+        memory-id-column-name: MEMORY_ID
+        content-column-name: CONTENT
+        content-column-type: CLOB
